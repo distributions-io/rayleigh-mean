@@ -11,7 +11,7 @@ The [expected value](https://en.wikipedia.org/wiki/Expected_value) for a [Raylei
 	<br>
 </div>
 
-where `sigma` is the scale parameter.
+where `sigma > 0` is the scale parameter.
 
 
 ## Installation
@@ -41,15 +41,15 @@ var matrix = require( 'dstructs-matrix' ),
 	i;
 
 out = mean( 2 );
-// returns 2.506628
+// returns ~2.507
 
 sigma = [ 2, 4, 6, 8 ];
 out = mean( sigma );
-// returns [ 2.506628, 5.013257, 7.519885, 10.02651 ]
+// returns [ ~2.507, ~5.013, ~7.52, ~10.027 ]
 
 sigma = new Float32ArrayArray( sigma );
 out = mean( sigma );
-// returns Float64Array( [2.506628,5.013257,7.519885,10.02651] )
+// returns Float64Array( [~2.507,~5.013,~7.52,~10.027] )
 
 sigma =  matrix( [ 2, 4, 6, 8 ], [2,2] );
 /*
@@ -59,8 +59,8 @@ sigma =  matrix( [ 2, 4, 6, 8 ], [2,2] );
 
 out = mean( sigma );
 /*
-	[ 2.506628, 5.013257,
-	  7.519885, 10.02651 ]
+	[ ~2.507, ~5.013,
+	  ~7.52, ~10.027 ]
 */
 ```
 
@@ -89,7 +89,7 @@ function getValue( d, i ) {
 var out = mean( sigma, {
 	'accessor': getValue
 });
-// returns [ 2.506628, 5.013257, 7.519885, 10.02651 ]
+// returns [ ~2.507, ~5.013, ~7.52, ~10.027 ]
 ```
 
 To [deepset](https://github.com/kgryte/utils-deep-set) an object `array`, provide a key path and, optionally, a key path separator.
@@ -105,10 +105,10 @@ var sigma = [
 var out = mean( sigma, 'x|1', '|' );
 /*
 	[
-		{'x':[9,2.506628]},
-		{'x':[9,5.013257]},
-		{'x':[9,7.519885]},
-		{'x':[9,10.02651]},
+		{'x':[9,~2.507]},
+		{'x':[9,~5.013]},
+		{'x':[9,~7.52]},
+		{'x':[9,~10.027]},
 	]
 */
 
@@ -149,7 +149,7 @@ sigma = [ 2, 4, 6, 8 ];
 out = mean( sigma, {
 	'copy': false
 });
-// returns [ 2.506628, 5.013257, 7.519885, 10.02651 ]
+// returns [ ~2.507, ~5.013, ~7.52, ~10.027 ]
 
 bool = ( data === out );
 // returns true
@@ -164,8 +164,8 @@ out = mean( mat, {
 	'copy': false
 });
 /*
-	[ 2.506628, 5.013257,
-	  7.519885, 10.02651 ]
+	[ ~2.507, ~5.013,
+	  ~7.52, ~10.027 ]
 */
 
 bool = ( mat === out );
@@ -251,7 +251,7 @@ var sigma,
 // Plain arrays...
 sigma = new Array( 10 );
 for ( i = 0; i < sigma.length; i++ ) {
-	sigma[ i ] = i;
+	sigma[ i ] = i + 1;
 }
 out = mean( sigma );
 
@@ -282,7 +282,7 @@ out = mean( sigma, {
 // Typed arrays...
 sigma = new Int32Array( 10 );
 for ( i = 0; i < sigma.length; i++ ) {
-	sigma[ i ] = i
+	sigma[ i ] = i + 1;
 }
 out = mean( sigma );
 

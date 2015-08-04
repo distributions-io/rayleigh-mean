@@ -13,7 +13,7 @@ var sigma,
 // Plain arrays...
 sigma = new Array( 10 );
 for ( i = 0; i < sigma.length; i++ ) {
-	sigma[ i ] = i;
+	sigma[ i ] = i + 1;
 }
 out = mean( sigma );
 console.log( 'Arrays: %s\n', out );
@@ -55,7 +55,7 @@ console.log( '\n' );
 // Typed arrays...
 sigma = new Int32Array( 10 );
 for ( i = 0; i < sigma.length; i++ ) {
-	sigma[ i ] = i;
+	sigma[ i ] = i + 1;
 }
 tmp = mean( sigma );
 out = '';
