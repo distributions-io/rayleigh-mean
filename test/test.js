@@ -12,6 +12,9 @@ var // Expectation library:
 	// Validate a value is NaN:
 	isnan = require( 'validate.io-nan' ),
 
+	// Deep close to:
+	deepCloseTo = require( './utils/deepcloseto.js' ),
+
 	// Module to be tested:
 	mean = require( './../lib' ),
 
@@ -128,10 +131,10 @@ describe( 'compute-mean', function tests() {
 	});
 
 	it( 'should compute the distribution mean when provided a number', function test() {
-		assert.strictEqual( mean( 2 ), 2.506628 );
-		assert.strictEqual( mean( 4  ), 5.013257 );
-		assert.strictEqual( mean( 6  ), 7.519885 );
-		assert.strictEqual( mean( 8  ), 10.02651 );
+		assert.closeTo( mean( 2 ), 2.506628, 1e-5 );
+		assert.closeTo( mean( 4  ), 5.013257, 1e-5 );
+		assert.closeTo( mean( 6  ), 7.519885, 1e-5 );
+		assert.closeTo( mean( 8  ), 10.02651, 1e-5 );
 	});
 
 	it( 'should compute the distribution mean when provided a plain array', function test() {
@@ -142,14 +145,14 @@ describe( 'compute-mean', function tests() {
 
 		actual = mean( sigma );
 		assert.notEqual( actual, sigma );
-		assert.deepEqual( actual, expected );
+		assert.isTrue( deepCloseTo( actual, expected, 1e-5 ) );
 
 		// Mutate...
 		actual = mean( sigma, {
 			'copy': false
 		});
 		assert.strictEqual( actual, sigma );
-		assert.deepEqual( sigma, expected );
+		assert.isTrue( deepCloseTo( sigma, expected, 1e-5 ) );
 	});
 
 	it( 'should compute the distribution mean when provided a typed array', function test() {
@@ -160,7 +163,7 @@ describe( 'compute-mean', function tests() {
 
 		actual = mean( sigma );
 		assert.notEqual( actual, sigma );
-		assert.deepEqual( actual, expected );
+		assert.isTrue( deepCloseTo( actual, expected, 1e-5 ) );
 
 		// Mutate:
 		actual = mean( sigma, {
@@ -168,7 +171,7 @@ describe( 'compute-mean', function tests() {
 		});
 		expected = new Float64Array( [ 2.506628,5.013257,7.519885,10.02651 ] );
 		assert.strictEqual( actual, sigma );
-		assert.deepEqual( sigma, expected );
+		assert.isTrue( deepCloseTo( sigma, expected, 1e-5 ) );
 	});
 
 	it( 'should compute the distribution mean and return an array of a specific type', function test() {
@@ -182,7 +185,7 @@ describe( 'compute-mean', function tests() {
 		});
 		assert.notEqual( actual, sigma );
 		assert.strictEqual( actual.BYTES_PER_ELEMENT, 4 );
-		assert.deepEqual( actual, expected );
+		assert.isTrue( deepCloseTo( actual, expected, 1e-5 ) );
 	});
 
 	it( 'should compute the distribution mean using an accessor', function test() {
@@ -200,7 +203,7 @@ describe( 'compute-mean', function tests() {
 			'accessor': getValue
 		});
 		assert.notEqual( actual, sigma );
-		assert.deepEqual( actual, expected );
+		assert.isTrue( deepCloseTo( actual, expected, 1e-5 ) );
 
 		// Mutate:
 		actual = mean( sigma, {
@@ -208,7 +211,7 @@ describe( 'compute-mean', function tests() {
 			'copy': false
 		});
 		assert.strictEqual( actual, sigma );
-		assert.deepEqual( sigma, expected );
+		assert.isTrue( deepCloseTo( sigma, expected, 1e-5 ) );
 
 		function getValue( d ) {
 			return d.sigma;
@@ -236,7 +239,7 @@ describe( 'compute-mean', function tests() {
 			'path': 'x.1'
 		});
 		assert.strictEqual( actual, data );
-		assert.deepEqual( actual, expected );
+		assert.isTrue( deepCloseTo( data, expected, 1e-5 ) );
 
 		// Specify a path with a custom separator...
 		data = [
@@ -251,7 +254,7 @@ describe( 'compute-mean', function tests() {
 			'sep': '/'
 		});
 		assert.strictEqual( actual, data );
-		assert.deepEqual( actual, expected );
+		assert.isTrue( deepCloseTo( data, expected, 1e-5 ) );
 	});
 
 	it( 'should compute an element-wise distribution mean when provided a matrix', function test() {

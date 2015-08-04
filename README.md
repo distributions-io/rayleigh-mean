@@ -7,7 +7,7 @@ Mean
 The [expected value](https://en.wikipedia.org/wiki/Expected_value) for a [Rayleigh](https://en.wikipedia.org/wiki/Rayleigh_distribution) random variable is
 
 <div class="equation" align="center" data-raw-text="\mathbb{E}\left[ X \right] = " data-equation="eq:expectation">
-	<img src="" alt="Expected value for a Rayleigh distribution.">
+	<img src="https://cdn.rawgit.com/distributions-io/rayleigh-mean/8bee959b3a632352cadc43f875106029cf6377f2/docs/img/eqn.svg" alt="Expected value for a Rayleigh distribution.">
 	<br>
 </div>
 

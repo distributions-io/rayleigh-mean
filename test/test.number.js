@@ -25,10 +25,10 @@ describe( 'number mean', function tests() {
 	});
 
 	it( 'should compute the distribution mean', function test() {
-		assert.strictEqual( mean( 2 ), 2.506628 );
-		assert.strictEqual( mean( 4  ), 5.013257 );
-		assert.strictEqual( mean( 6  ), 7.519885 );
-		assert.strictEqual( mean( 8  ), 10.02651 );
+		assert.closeTo( mean( 2 ), 2.506628, 1e-5 );
+		assert.closeTo( mean( 4  ), 5.013257, 1e-5 );
+		assert.closeTo( mean( 6  ), 7.519885, 1e-5 );
+		assert.closeTo( mean( 8  ), 10.02651, 1e-5 );
 	});
 
 });

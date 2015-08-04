@@ -6,6 +6,9 @@
 var // Expectation library:
 	chai = require( 'chai' ),
 
+	// Deep close to:
+	deepCloseTo = require( './utils/deepcloseto.js' ),
+
 	// Module to be tested:
 	mean = require( './../lib/array.js' );
 
@@ -33,7 +36,7 @@ describe( 'typed-array mean', function tests() {
 		actual = mean( actual, sigma );
 		expected = new Float64Array( [ 2.506628, 5.013257, 7.519885, 10.02651 ] );
 
-		assert.deepEqual( actual, expected );
+		assert.isTrue( deepCloseTo( actual, expected, 1e-5 ) );
 	});
 
 	it( 'should return an empty array if provided an empty array', function test() {

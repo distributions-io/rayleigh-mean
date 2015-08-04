@@ -6,6 +6,9 @@
 var // Expectation library:
 	chai = require( 'chai' ),
 
+	// Deep close to:
+	deepCloseTo = require( './utils/deepcloseto.js' ),
+	
 	// Module to be tested:
 	mean = require( './../lib/accessor.js' );
 
@@ -38,7 +41,8 @@ describe( 'accessor mean', function tests() {
 		actual = mean( actual, sigma, getValue );
 		expected = [ 2.506628, 5.013257, 7.519885, 10.02651 ];
 
-		assert.deepEqual( actual, expected );
+		assert.isTrue( deepCloseTo( actual, expected, 1e-5 ) );
+
 
 		function getValue( d ) {
 			return d.sigma;
