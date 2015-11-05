@@ -102,7 +102,10 @@ var sigma = [
 	{'x':[9,8]}
 ];
 
-var out = mean( sigma, 'x|1', '|' );
+var out = mean( sigma, {
+	'path': 'x|1',
+	'sep': '|'
+});
 /*
 	[
 		{'x':[9,~2.507]},
